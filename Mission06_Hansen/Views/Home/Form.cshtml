@@ -3,39 +3,49 @@
 *@
 @{
 }
-@model Form
+@model Movie
 
-<h1>New Movie Form</h1>
+<h1>Movie Form</h1>
 <br />
 
 <form method="post">
+    <input type="hidden" asp-for="MovieId" />
+
     <label asp-for="Title">Title:</label><br>
     <input asp-for="Title" required /><br><br>
 
-    <label asp-for="Category">Category:</label><br>
-    <input asp-for="Category" required /><br><br>
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category c in ViewBag.Categories)
+        {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+    </select><br /><br />
 
     <label asp-for="Year">Year:</label><br>
-    <input asp-for="Year" type="number" required /><br><br>
+    <input asp-for="Year" type="number" min="1888" required /><br><br>
 
     <label asp-for="Director">Director:</label><br>
-    <input asp-for="Director" required /><br><br>
+    <input asp-for="Director" /><br /><br />
 
     <label asp-for="Rating">Rating:</label><br>
-    <select asp-for="Rating" required>
+    <select asp-for="Rating">
         <option value="G">G</option>
         <option value="PG">PG</option>
         <option value="PG-13">PG-13</option>
         <option value="R">R</option>
-    </select><br><br>
+    </select><br /><br />
 
     <label asp-for="Edited">Edited:</label><br>
-    <input type="radio" asp-for="Edited" value="true" /> Yes
-    <input type="radio" asp-for="Edited" value="false" /> No<br><br>
-    <input type="hidden" asp-for="Edited" value="false" />
+    <input type="radio" asp-for="Edited" value="1" required/> Yes
+    <input type="radio" asp-for="Edited" value="0" required/> No<br><br>
 
     <label asp-for="LentTo">Lent To:</label><br>
     <input asp-for="LentTo" /><br><br>
+
+    <label asp-for="CopiedToPlex">CopiedToPlex:</label>
+    <input type="radio" asp-for="CopiedToPlex" value="1" required/> Yes
+    <input type="radio" asp-for="CopiedToPlex" value="0" required/> No<br><br>
 
     <label asp-for="Notes">Notes (max 25 characters):</label><br>
     <input asp-for="Notes" maxlength="25" /><br><br>
